@@ -1,0 +1,294 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------ */
+/* Fontes (hospedadas no próprio site, só o subconjunto latino)        */
+/* ------------------------------------------------------------------ */
+
+@font-face {
+  font-family: "DM Serif Display";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/dm-serif-display-latin.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "DM Serif Display";
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/dm-serif-display-italic-latin.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Jost";
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url("/fonts/jost-latin.woff2") format("woff2");
+}
+
+/* ------------------------------------------------------------------ */
+/* Tokens                                                              */
+/* ------------------------------------------------------------------ */
+
+@theme {
+  --font-display: "DM Serif Display", Georgia, "Times New Roman", serif;
+  --font-sans: "Jost", ui-sans-serif, system-ui, sans-serif;
+
+  --color-nude: #f7f2ee; /* fundo */
+  --color-card: #ffffff; /* cartões */
+  --color-chip: #f3ece5; /* etiquetas e chips */
+  --color-line: #e0d3c9; /* linhas divisórias (decorativas) */
+  --color-ink: #2e1e22; /* texto principal e bloco escuro */
+  --color-muted: #6b5a5d; /* texto secundário — 5,8:1 sobre o fundo */
+  --color-wine: #6e2f3f; /* destaque — 8,8:1 sobre o fundo */
+  --color-wine-soft: #f3e3df; /* texto secundário sobre vinho — 7,9:1 */
+  --color-photo-1: #e6d7ca;
+  --color-photo-2: #d6c2b2;
+  --color-photo-3: #c8ae9b;
+  --color-dark-muted: #e6dad3; /* secundário no bloco escuro — 11,6:1 */
+  --color-sand: #e7c9a9; /* números no bloco escuro — 10:1 */
+
+  --ease-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ------------------------------------------------------------------ */
+/* Base                                                                */
+/* ------------------------------------------------------------------ */
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5.5rem; /* altura do cabeçalho fixo */
+    -webkit-text-size-adjust: 100%;
+    interpolate-size: allow-keywords; /* permite animar a altura das dúvidas até "auto" */
+  }
+
+  body {
+    @apply bg-nude font-sans text-ink antialiased;
+    font-size: 1.0625rem;
+    line-height: 1.65;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3 {
+    @apply font-display font-normal;
+    text-wrap: balance;
+    letter-spacing: -0.01em;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-wine);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+
+  .on-dark :focus-visible {
+    outline-color: var(--color-sand);
+  }
+
+  ::selection {
+    background: var(--color-wine);
+    color: #fff;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Componentes                                                         */
+/* ------------------------------------------------------------------ */
+
+@layer components {
+  /* Rótulo pequeno em maiúsculas espaçadas */
+  .eyebrow {
+    @apply text-[0.75rem] font-medium uppercase text-muted;
+    letter-spacing: 0.2em;
+    line-height: 1.6;
+  }
+
+  /* Palavra-chave dos títulos */
+  .accent {
+    @apply italic text-wine;
+  }
+  /* No bloco escuro, o vinho não tem contraste: o itálico usa o tom areia */
+  .on-dark .accent {
+    @apply text-sand;
+  }
+
+  .btn {
+    @apply inline-flex min-h-12 items-center justify-center gap-2 rounded-full px-7 text-[0.975rem] font-medium whitespace-nowrap;
+    transition:
+      background-color 0.25s ease,
+      color 0.25s ease,
+      border-color 0.25s ease;
+  }
+
+  .btn-wine {
+    @apply bg-wine text-white;
+  }
+  .btn-wine:hover {
+    background-color: #5a2533;
+  }
+
+  .btn-outline {
+    @apply border border-wine text-wine;
+  }
+  .btn-outline:hover {
+    @apply bg-wine text-white;
+  }
+
+  .btn-white {
+    @apply bg-white text-wine;
+  }
+  .btn-white:hover {
+    @apply bg-chip;
+  }
+
+  .chip {
+    @apply inline-flex items-center rounded-full bg-chip px-3 py-1 text-[0.8125rem] leading-snug text-ink;
+  }
+
+  /* Link discreto "Agendar … →" */
+  .text-link {
+    @apply inline-flex min-h-11 items-center gap-1.5 font-medium text-wine;
+  }
+  .text-link .arrow {
+    transition: transform 0.25s var(--ease-soft);
+  }
+  .text-link:hover {
+    @apply underline underline-offset-4;
+  }
+  .text-link:hover .arrow {
+    transform: translateX(3px);
+  }
+
+  /* Elemento-assinatura: foto com topo em arco */
+  .arch {
+    border-radius: 999px 999px 24px 24px;
+    overflow: hidden;
+    background-color: var(--color-photo-1);
+    isolation: isolate; /* mantém o recorte durante o zoom no Safari */
+  }
+
+  .arch img {
+    @apply block h-full w-full object-cover;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Animações                                                           */
+/* ------------------------------------------------------------------ */
+
+/* Hero: título primeiro, depois os três arcos em sequência (120 ms) */
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(var(--rise, 24px));
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.hero-in {
+  animation: rise-in 0.8s var(--ease-soft) both;
+  animation-delay: var(--delay, 0ms);
+}
+
+/* Revelação na rolagem: só esconde quando o JS está ativo (classe .js no <html>) */
+.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity 0.7s var(--ease-soft),
+    transform 0.7s var(--ease-soft);
+}
+
+.js [data-reveal][data-shown] {
+  opacity: 1;
+  transform: none;
+}
+
+/* Cartões de serviço: o cartão sobe 4px e a foto ganha zoom de 1.04 */
+.service-card {
+  transition: transform 0.45s var(--ease-soft);
+}
+.service-card .arch img {
+  transition: transform 0.7s var(--ease-soft);
+}
+@media (hover: hover) {
+  .service-card:hover {
+    transform: translateY(-4px);
+  }
+  .service-card:hover .arch img {
+    transform: scale(1.04);
+  }
+}
+
+/* Dúvidas: abertura com transição de altura (navegadores com ::details-content) */
+.faq-item::details-content {
+  block-size: 0;
+  overflow: hidden;
+  transition:
+    block-size 0.4s var(--ease-soft),
+    content-visibility 0.4s allow-discrete;
+}
+.faq-item[open]::details-content {
+  block-size: auto;
+}
+.faq-item summary {
+  list-style: none;
+}
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+.faq-icon {
+  transition: transform 0.35s var(--ease-soft);
+}
+.faq-item[open] .faq-icon {
+  transform: rotate(45deg);
+}
+
+/* Botão flutuante */
+.floating-cta {
+  transition:
+    opacity 0.35s ease,
+    transform 0.35s var(--ease-soft);
+}
+.floating-cta[data-visible="false"] {
+  opacity: 0;
+  transform: translateY(16px);
+  pointer-events: none;
+}
+
+/* Movimento reduzido: tudo estático */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after,
+  .faq-item::details-content {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .js [data-reveal] {
+    opacity: 1;
+    transform: none;
+  }
+
+  .service-card:hover,
+  .service-card:hover .arch img {
+    transform: none;
+  }
+}

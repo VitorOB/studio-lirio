@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="14" fill="#F3ECE5"/>
+  <!-- "L" da DM Serif Display, vinho sobre nude -->
+  <path fill="#6E2F3F" transform="matrix(0.06061 0 0 -0.06061 15.667 52.000)" d="M22 0V10L43 18Q64 26 69.5 37.5Q75 49 75 69V591Q75 611 69.0 623.0Q63 635 43 642L22 650V660H277V650L259 642Q240 635 233.0 622.5Q226 610 226 590V20H380Q417 20 434.5 38.0Q452 56 468 90L507 174H517L508 0Z"/>
+</svg>
