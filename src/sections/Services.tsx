@@ -1,9 +1,12 @@
-import { services, servicesSection, serviceMessage, whatsappLink } from "../data/site";
+import { whatsappLink } from "../data/site";
+import { useSite } from "../i18n/lang";
 import { ArchImage } from "../components/ArchImage";
 import { SectionHeading } from "../components/SectionHeading";
 import { WhatsAppNote } from "../components/WhatsAppNote";
 
 export function Services() {
+  const { site, t } = useSite();
+  const { services, servicesSection, serviceMessage } = site;
   return (
     <section id="servicos" aria-labelledby="servicos-title" className="py-24 sm:py-32">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
@@ -27,7 +30,7 @@ export function Services() {
                 <div className="flex flex-1 flex-col px-3 pt-6">
                   <h3 className="text-[1.75rem] leading-tight">{service.name}</h3>
 
-                  <ul className="mt-4 flex flex-wrap gap-2" aria-label={`Serviços de ${service.name.toLowerCase()}`}>
+                  <ul className="mt-4 flex flex-wrap gap-2" aria-label={t.servicesOf(service.name)}>
                     {service.items.map((item) => (
                       <li key={item} className="chip">
                         {item}
@@ -41,7 +44,7 @@ export function Services() {
                     rel="noopener noreferrer"
                     className="text-link mt-auto self-start pt-5 text-[0.95rem]"
                   >
-                    Agendar {service.name.toLowerCase()}
+                    {t.bookService(service.name)}
                     <span className="arrow" aria-hidden="true">
                       →
                     </span>

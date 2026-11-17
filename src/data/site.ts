@@ -51,7 +51,7 @@ export const navigation = [
   { label: "Serviços", href: "#servicos" },
   { label: "Pacotes", href: "#pacotes" },
   { label: "Dúvidas", href: "#duvidas" },
-] as const;
+];
 
 /* ------------------------------------------------------------------ */
 /* Imagens                                                             */
@@ -65,7 +65,7 @@ export type SiteImage = {
   height: number;
 };
 
-const photo = (name: string, alt: string): SiteImage => ({
+export const photo = (name: string, alt: string): SiteImage => ({
   base: `/images/${name}`,
   alt,
   width: 1200,
@@ -241,3 +241,28 @@ export const address = {
   city: "Sua cidade", // TROCAR
   demo: true, // false quando o endereço for real
 };
+
+/* ------------------------------------------------------------------ */
+/* Conjunto completo, usado pela troca de idioma (src/i18n).           */
+/* A versão em inglês fica em site.en.ts, com este mesmo formato.      */
+/* ------------------------------------------------------------------ */
+
+export const sitePt = {
+  contact,
+  creatorLink,
+  brand,
+  navigation,
+  hero,
+  servicesSection,
+  services,
+  serviceMessage,
+  packagesSection,
+  packages,
+  packageMessage,
+  faqSection,
+  faqs,
+  bookingSection,
+  hours,
+  address,
+};
+export type SiteData = typeof sitePt;

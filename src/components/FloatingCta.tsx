@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { CalendarHeart } from "lucide-react";
-import { hero } from "../data/site";
+import { useSite } from "../i18n/lang";
 import { WhatsAppNote } from "./WhatsAppNote";
 
 /**
@@ -9,6 +9,8 @@ import { WhatsAppNote } from "./WhatsAppNote";
  * entram na tela, para não cobrir o fim da página. Escondido, fica `inert`.
  */
 export function FloatingCta() {
+  const { site, t } = useSite();
+  const { hero } = site;
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -44,7 +46,7 @@ export function FloatingCta() {
         className="btn btn-wine min-h-[3.25rem] gap-2.5 px-6 shadow-[0_6px_20px_-8px_rgba(46,30,34,0.45)]"
       >
         <CalendarHeart aria-hidden="true" size={19} strokeWidth={1.75} />
-        Agendar
+        {t.book}
         <WhatsAppNote />
       </a>
     </div>

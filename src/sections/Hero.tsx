@@ -1,5 +1,5 @@
 import type { CSSProperties } from "react";
-import { hero } from "../data/site";
+import { useSite } from "../i18n/lang";
 import { Accent } from "../components/Accent";
 import { ArchImage } from "../components/ArchImage";
 import { WhatsAppNote } from "../components/WhatsAppNote";
@@ -12,6 +12,7 @@ const ARCH_START = 220;
 const ARCH_STEP = 120;
 
 export function Hero() {
+  const { hero } = useSite().site;
   const [nails, hair, room] = hero.images;
   // No celular, o rótulo quebra em duas linhas de dois itens, sem "·" sobrando no começo.
   const eyebrowItems = hero.eyebrow.split(" · ");

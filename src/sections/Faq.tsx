@@ -1,9 +1,12 @@
 import { Plus } from "lucide-react";
-import { faqs, faqSection, whatsappLink } from "../data/site";
+import { whatsappLink } from "../data/site";
+import { useSite } from "../i18n/lang";
 import { Accent } from "../components/Accent";
 import { WhatsAppNote } from "../components/WhatsAppNote";
 
 export function Faq() {
+  const { site, t } = useSite();
+  const { faqs, faqSection } = site;
   return (
     <section id="duvidas" aria-labelledby="duvidas-title" className="pb-24 sm:pb-32">
       <div className="mx-auto grid max-w-6xl gap-10 px-4 sm:px-6 lg:grid-cols-12 lg:gap-16 lg:px-8">
@@ -13,12 +16,12 @@ export function Faq() {
           </h2>
           <p className="mt-4 max-w-sm text-muted">{faqSection.intro}</p>
           <a
-            href={whatsappLink("Olá! Tenho uma dúvida sobre o Studio Lírio.")}
+            href={whatsappLink(t.faqMessage)}
             target="_blank"
             rel="noopener noreferrer"
             className="text-link mt-3"
           >
-            Tirar dúvida no WhatsApp
+            {t.faqLink}
             <span className="arrow" aria-hidden="true">
               →
             </span>

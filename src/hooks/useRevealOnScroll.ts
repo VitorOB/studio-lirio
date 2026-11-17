@@ -9,14 +9,15 @@ declare global {
 /**
  * Observa todos os elementos com `data-reveal` e marca `data-shown`
  * na primeira vez que entram na tela. Não repete ao voltar.
+ * `refresh` (o idioma atual) faz observar de novo os elementos recriados na troca de idioma.
  */
-export function useRevealOnScroll() {
+export function useRevealOnScroll(refresh?: unknown) {
   useEffect(() => {
     window.__lirioReady = true;
     // Caso o tempo de segurança do index.html já tenha removido a classe.
     document.documentElement.classList.add("js");
 
-    const targets = document.querySelectorAll<HTMLElement>("[data-reveal]");
+    const targets = document.querySelectorAll<HTMLElement>("[data-reveal]:not([data-shown])");
     const show = (el: HTMLElement) => el.setAttribute("data-shown", "");
 
     if (!("IntersectionObserver" in window)) {
@@ -37,5 +38,5 @@ export function useRevealOnScroll() {
 
     targets.forEach((el) => observer.observe(el));
     return () => observer.disconnect();
-  }, []);
+  }, [refresh]);
 }

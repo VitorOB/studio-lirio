@@ -1,8 +1,11 @@
-import { packages, packagesSection, packageMessage, whatsappLink } from "../data/site";
+import { whatsappLink } from "../data/site";
+import { useSite } from "../i18n/lang";
 import { SectionHeading } from "../components/SectionHeading";
 import { WhatsAppNote } from "../components/WhatsAppNote";
 
 export function Packages() {
+  const { site, t } = useSite();
+  const { packages, packagesSection, packageMessage } = site;
   return (
     <section id="pacotes" aria-labelledby="pacotes-title" className="pb-24 sm:pb-32">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
@@ -33,8 +36,8 @@ export function Packages() {
                     rel="noopener noreferrer"
                     className={`text-link mt-auto self-start pt-7 ${featured ? "text-white" : ""}`}
                   >
-                    Quero saber mais
-                    <span className="sr-only"> sobre o pacote {item.name}</span>
+                    {t.learnMore}
+                    <span className="sr-only">{t.aboutPackage(item.name)}</span>
                     <span className="arrow" aria-hidden="true">
                       →
                     </span>

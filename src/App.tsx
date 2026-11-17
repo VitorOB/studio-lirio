@@ -1,5 +1,6 @@
 import { address, brand, contact, hours, services } from "./data/site";
 import { useRevealOnScroll } from "./hooks/useRevealOnScroll";
+import { useSite } from "./i18n/lang";
 import { Header } from "./components/Header";
 import { FloatingCta } from "./components/FloatingCta";
 import { Hero } from "./sections/Hero";
@@ -33,7 +34,8 @@ const jsonLd = {
 };
 
 export default function App() {
-  useRevealOnScroll();
+  const { lang, t } = useSite();
+  useRevealOnScroll(lang);
 
   return (
     <div id="topo">
@@ -41,7 +43,7 @@ export default function App() {
         href="#conteudo"
         className="sr-only z-50 rounded-full bg-wine px-5 py-3 text-white focus:not-sr-only focus:fixed focus:top-3 focus:left-3"
       >
-        Pular para o conteúdo
+        {t.skipLink}
       </a>
 
       <Header />

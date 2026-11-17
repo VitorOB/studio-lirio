@@ -1,8 +1,10 @@
-import { brand, contact, creatorLink, navigation } from "../data/site";
+import { useSite } from "../i18n/lang";
 import { DemoTag } from "../components/DemoTag";
 import { WhatsAppNote } from "../components/WhatsAppNote";
 
 export function Footer() {
+  const { site, t } = useSite();
+  const { brand, contact, creatorLink, navigation } = site;
   const year = new Date().getFullYear();
 
   return (
@@ -16,7 +18,7 @@ export function Footer() {
             <p className="mt-2 text-[0.95rem] text-muted">{brand.tagline}</p>
           </div>
 
-          <nav aria-label="Rodapé">
+          <nav aria-label={t.footerNav}>
             <ul className="flex flex-wrap items-center gap-x-7 gap-y-1">
               {navigation.map((item) => (
                 <li key={item.href}>
@@ -34,7 +36,7 @@ export function Footer() {
                     className="inline-flex min-h-11 items-center gap-2 text-ink hover:text-wine"
                   >
                     Instagram
-                    <span className="sr-only"> (abre em nova aba)</span>
+                    <span className="sr-only"> {t.newTab}</span>
                   </a>
                 ) : (
                   /* Sem perfil configurado: não finge ser um link que funciona. */
@@ -57,15 +59,14 @@ export function Footer() {
             © {year} {brand.name}
           </p>
           <p className="md:text-right">
-            Site demonstrativo criado por {contact.creatorName || "[NOME]"} — quer um site assim para o seu
-            salão?{" "}
+            {t.demoCreatedBy} {contact.creatorName || "[NOME]"} {t.wantSite}{" "}
             <a
               href={creatorLink}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex min-h-11 items-center font-medium text-wine underline underline-offset-4"
             >
-              Fale comigo
+              {t.talkToMe}
               <WhatsAppNote />
             </a>
           </p>

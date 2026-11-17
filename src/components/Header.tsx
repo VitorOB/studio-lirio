@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Menu, X } from "lucide-react";
-import { brand, hero, navigation } from "../data/site";
+import { useSite } from "../i18n/lang";
+import { LanguageSwitch } from "./LanguageSwitch";
 import { WhatsAppNote } from "./WhatsAppNote";
 
 const MENU_ID = "menu-mobile";
@@ -13,6 +14,8 @@ const MENU_ID = "menu-mobile";
  * - Tab ao sair do painel também fecha.
  */
 export function Header() {
+  const { site, t } = useSite();
+  const { brand, hero, navigation } = site;
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const toggle = useRef<HTMLButtonElement>(null);
@@ -74,7 +77,7 @@ export function Header() {
           {brand.name}
         </a>
 
-        <nav aria-label="Principal" className="hidden md:block">
+        <nav aria-label={t.mainNav} className="hidden md:block">
           <ul className="flex items-center gap-8">
             {navigation.map((item) => (
               <li key={item.href}>
@@ -96,9 +99,11 @@ export function Header() {
             rel="noopener noreferrer"
             className="btn btn-wine hidden min-h-11 px-5 text-[0.925rem] sm:inline-flex"
           >
-            Agendar horário
+            {t.bookTime}
             <WhatsAppNote />
           </a>
+
+          <LanguageSwitch />
 
           <button
             ref={toggle}
@@ -113,7 +118,7 @@ export function Header() {
             ) : (
               <Menu aria-hidden="true" size={24} strokeWidth={1.5} />
             )}
-            <span className="sr-only">{open ? "Fechar menu" : "Abrir menu"}</span>
+            <span className="sr-only">{open ? t.closeMenu : t.openMenu}</span>
           </button>
         </div>
       </div>
@@ -124,7 +129,7 @@ export function Header() {
         hidden={!open}
         className="border-t border-line bg-nude px-4 pt-2 pb-6 sm:px-6 md:hidden"
       >
-        <nav aria-label="Menu do celular">
+        <nav aria-label={t.mobileNav}>
           <ul>
             {navigation.map((item) => (
               <li key={item.href} className="border-b border-line">
@@ -146,7 +151,7 @@ export function Header() {
           onClick={() => close(false)}
           className="btn btn-wine mt-6 w-full"
         >
-          Agendar horário
+          {t.bookTime}
           <WhatsAppNote />
         </a>
       </div>

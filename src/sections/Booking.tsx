@@ -1,10 +1,12 @@
 import { Clock, MapPin } from "lucide-react";
-import { address, bookingSection, hours } from "../data/site";
+import { useSite } from "../i18n/lang";
 import { Accent } from "../components/Accent";
 import { DemoTag } from "../components/DemoTag";
 import { WhatsAppNote } from "../components/WhatsAppNote";
 
 export function Booking() {
+  const { site, t } = useSite();
+  const { address, bookingSection, hours } = site;
   return (
     <section id="agendar" aria-labelledby="agendar-title" className="px-4 pb-24 sm:px-6 sm:pb-32 lg:px-8">
       <div
@@ -20,14 +22,14 @@ export function Booking() {
             <div className="flex items-start gap-3">
               <dt>
                 <Clock aria-hidden="true" size={20} strokeWidth={1.5} className="mt-[3px] text-sand" />
-                <span className="sr-only">Horário</span>
+                <span className="sr-only">{t.hoursSr}</span>
               </dt>
               <dd>{hours.label}</dd>
             </div>
             <div className="flex items-start gap-3">
               <dt>
                 <MapPin aria-hidden="true" size={20} strokeWidth={1.5} className="mt-[3px] text-sand" />
-                <span className="sr-only">Endereço</span>
+                <span className="sr-only">{t.addressSr}</span>
               </dt>
               <dd className="flex flex-wrap items-center gap-x-3 gap-y-1">
                 <span>
