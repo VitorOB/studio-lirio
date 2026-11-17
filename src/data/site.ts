@@ -13,8 +13,8 @@ export const contact = {
   whatsappNumber: "", // 5531999999999 — preencher antes de publicar (só números, com DDI e DDD)
   whatsappMessage: "Olá! Gostaria de agendar um horário no Studio Lírio.",
   instagram: "", // ex.: "https://www.instagram.com/studiolirio" — vazio = aparece como demonstrativo
-  creatorName: "", // nome de quem criou o site (crédito do portfólio)
-  creatorWhatsapp: "", // número de quem criou o site, só números
+  creatorName: "Vitor Otávio", // nome de quem criou o site (crédito do portfólio)
+  creatorWhatsapp: "5531993628211", // número de quem criou o site, só números
 };
 
 /** Mensagem que vai pronta para quem criou o site. */
