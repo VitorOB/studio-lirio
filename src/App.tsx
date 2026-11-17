@@ -15,7 +15,8 @@ const jsonLd = {
   "@type": "BeautySalon",
   name: brand.name,
   description: brand.description,
-  image: "/images/hero-ambiente.jpg",
+  url: `${brand.url}/`,
+  image: `${brand.url}/images/hero-ambiente.jpg`,
   openingHours: hours.schema,
   address: {
     "@type": "PostalAddress",

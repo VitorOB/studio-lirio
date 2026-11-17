@@ -39,6 +39,8 @@ export const creatorLink = whatsappLink(creatorMessage, contact.creatorWhatsapp)
 /* ------------------------------------------------------------------ */
 
 export const brand = {
+  /** Endereço publicado (sem barra no fim). Ao trocar, atualize também canonical e og:* no index.html. */
+  url: "https://studio-lirio.vercel.app",
   name: "Studio Lírio",
   tagline: "Salão de beleza",
   description:
